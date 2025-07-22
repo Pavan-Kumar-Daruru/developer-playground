@@ -10,7 +10,7 @@ public class AccountRelatedCount {
 
         }
 
-        List<Account> acc = [SELECT Id, Name,(SELECT AccountId FROM Contacts) FROM Account WHERE Id In:setid];
+        List<Account> acc = [SELECT Id, Name,(SELECT AccountId FROM Contacts) FROM Account WHERE Id In:setid LIMIT 100];
 
         for(Account a : acc) {
 
