@@ -10,9 +10,10 @@ public class AccountRelatedCount {
 
         }
 
-        System.debug('newconlist '+newconlist);
 
         List<Account> acc = [SELECT Id, Name,(SELECT AccountId FROM Contacts) FROM Account WHERE Id In:setid LIMIT 200];
+        
+        System.debug('newconlist '+newconlist)
 
 
         for(Account a : acc) {
@@ -44,7 +45,7 @@ public class AccountRelatedCount {
         for(Account a : accold) {
 
             List<Contact> conoldsize = a.contacts;
-
+            System.debug(a);
             a.count__c = String.valueOf(conoldsize.size());
 
         }
