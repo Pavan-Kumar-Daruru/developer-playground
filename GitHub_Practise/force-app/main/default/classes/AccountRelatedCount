@@ -1,0 +1,51 @@
+public class AccountRelatedCount {
+
+    public static void ContactCount(List<Contact> newconlist) {
+
+        Set<Id> setid = new Set<Id>();	
+
+        for(Contact c1 : newconlist) {
+            if(c1.Is_Primary__c == true){
+                setid.add(c1.AccountId);
+            }
+
+        }
+
+        List<Account> acc = [SELECT Id, Name,(SELECT AccountId FROM Contacts) FROM Account WHERE Id In:setid LIMIT 200];
+
+        for(Account a : acc) {
+            List<Contact> consize = a.contacts;
+
+            a.count__c = String.valueOf(consize.size());
+
+        }
+
+        update acc;
+
+    }
+
+    public static void ContactDeleteCount(List<Contact> oldconlist) {
+
+        Set<Id> setoldid = new Set<Id>();	
+
+        for(Contact c1 : oldconlist) {
+
+            setoldid.add(c1.AccountId);
+
+        }
+
+        List<Account> accold = [SELECT Id, Name,(SELECT AccountId FROM Contacts) FROM Account WHERE Id In:setoldid];
+
+        for(Account a : accold) {
+
+            List<Contact> conoldsize = a.contacts;
+
+            a.count__c = String.valueOf(conoldsize.size());
+
+        }
+
+        update accold;
+
+    }
+
+}
