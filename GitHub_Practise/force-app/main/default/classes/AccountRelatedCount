@@ -10,9 +10,15 @@ public class AccountRelatedCount {
 
         }
 
-        List<Account> acc = [SELECT Id, Name,(SELECT AccountId FROM Contacts) FROM Account WHERE Id In:setid LIMIT 100];
+
+        List<Account> acc = [SELECT Id, Name,(SELECT AccountId FROM Contacts) FROM Account WHERE Id In:setid LIMIT 200];
+        
+        System.debug('newconlist '+newconlist)
+
 
         for(Account a : acc) {
+            
+             System.debug('Account :  '+acc);
 
             List<Contact> consize = a.contacts;
 
